@@ -5,13 +5,13 @@
 .navbar-toggler-icon{
   width: 1.5rem;height: 1.5rem;
   border: 0;
+  left:1rem;
   position: absolute;
   z-index: 99999;
 }
 #content{
   position: absolute;
   z-index: 999;
-  background-color:rgba(0,0,0,0.1);
 }
 .bg-light{background:transparent !important;}
 .pt-6{
@@ -22,10 +22,4 @@
 .acolor{
   color: #4c4c4c;
   font-size: 14px;
-}
-.search{
-  padding-top:5px;
-  color: #4c4c4c;
-  font-size: 14px;
-  float:right;
 }
