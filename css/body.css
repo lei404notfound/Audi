@@ -1,0 +1,43 @@
+.container-fluid {
+  padding-right:0px;
+  padding-left: 0px;
+}
+a{
+  font-size: 1rem;
+  color:rgba(0, 0, 0, 0.8) !important;
+}
+ul>li>a>img{
+  transition: all 1s;
+}
+ul>li>a>img:hover{
+  transform: scale(1.1);
+}
+.fleft{
+  position: absolute;
+  top:4rem;
+  left:4rem;
+  z-index: 99;
+}
+.pic1{
+  background-repeat:no-repeat;
+  position: relative;
+}
+.fs{
+  font-size: 1.2rem;
+  line-height: 4rem;
+}
+.btn-dark {
+  background-color: #000;
+  border-radius: 0;
+}
+.bt{
+  width: 80%;
+}
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  border: none;
+}
+.bbr{border-bottom:2px solid rgba(0, 0, 0, 0.8) !important;}
+.nav-tabs {
+  border-bottom: 0px;
+}
