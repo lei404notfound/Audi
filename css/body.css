@@ -54,8 +54,29 @@ h2{
 .div2{
   position: relative;
 }
-
-
+.btn-light{
+  background-color: #000 !important;
+  border: 1px solid #fff;
+  color:#fff;
+  width: 15rem;
+  height:4.5rem;
+  border-radius: 0;
+}
+.big_p{
+  font-size: 1.4rem;
+  margin:2rem 2rem;
+}
+.normal_p{
+  padding:2rem 2rem;
+  font-size: 1rem;
+}
+.span_f{
+  font-size: 1.1rem;
+  color:rgb(180, 120, 120);
+}
+.span_f:hover{
+  color:rgb(216, 64, 64);
+}
 
 @media (min-width:1024px){
   .pic1{
