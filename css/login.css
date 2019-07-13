@@ -43,14 +43,14 @@ div>input{
 div>input:hover{
   border-bottom: 0.1rem solid #1cc3e3;
 }
-div>input.err-name{
+/* div>input.err-name{
   padding-right:20px;
   background:url(../images/login/uname-error.png) no-repeat scroll right center transparent;
 }
 div>input.err-pwd{
   padding-right:20px;
   background:url(../images/login/upwd-error.png) no-repeat scroll right center transparent;
-}
+} */
 div.close{
   display: inline-block;
 }
@@ -64,4 +64,10 @@ div.close{
 }
 a>img.w-5{
   width:3rem;
+}
+
+.img1{
+  position:absolute;
+  top:10px;left:293px;
+  /* display:none; */
 }
