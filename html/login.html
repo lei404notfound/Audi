@@ -13,26 +13,31 @@
 </head>
 <body>
   <div class="bg-1">
-    <div class="nav">
-      <div><h2 >登录</h2></div>
-      <div><p>用户名</p></div>
-      <div><input id="uname" type="text" placeholder="请输入用户名"></div>
-      <div><p>密码</p></div>
-      <div><input type="password" id="upwd" placeholder="请输入密码"></div>
-      <div><a href="#">忘记密码?</a></div>
+    <div class="login p-r">
+      <h2 class="h-center my-4">登录</h2>
+      <p class="my-4">用户名</p>
       <div>
-        <a href="#">
-          <button>登录</button>
+        <input class="w-100 py-2 err-name" id="uname" type="text" placeholder="请输入用户名">
+      </div>
+      <p class="my-4">密码</p>
+      <div>
+        <input class="w-100 py-2 err-pwd" type="password" id="upwd" placeholder="请输入密码">
+      </div>
+      <div class="a-right mt-3"><a href="javascript:;">忘记密码?</a></div>
+      <div>
+        <a href="javascript:;">
+          <button class="btn login-btn w-100 my-4">登录</button>
         </a>
       </div>
-      <div><a class="a-center" href="#">第三方登录</a></div>
-      <div>
-        <a href="#"><img src=""></a>
-        <a href="#"><img src=""></a>
-        <a href="#"><img src=""></a>
+      <div class="h-center my-4">第三方登录</div>
+      <div class="w-100 h-center my-4">
+        <a href="javascript:;"><img class="w-5 mr-2" src="../images/login/wx.png"></a>
+        <a href="javascript:;"><img class="w-5 mr-2" src="../images/login/qq.png"></a>
+        <a href="javascript:;"><img class="w-5 mr-2" src="../images/login/wb.png"></a>
       </div>
-      <div><a class="a-center" href="#">立即注册</a></div>
+      <div class="h-center"><a href="#">立即注册</a></div>
     </div>
   </div>
+  <script src="../js/login.js"></script>
 </body>
 </html>
