@@ -25,7 +25,6 @@ div.bg-1{
   height:750px;
   background-color: #fff;
   padding:4rem 3rem;
-  border-radius:1rem;
   position: absolute;
   left:50%;top:50%;
   transform: translate(-50%,-50%);
@@ -38,25 +37,19 @@ a>button{color:#fff;}
 .a-right{text-align:right;}
 div>input{
   border:0;
+  outline:0;
   border-bottom: 0.1rem solid #b9b9b9;
 }
 div>input:hover{
   border-bottom: 0.1rem solid #1cc3e3;
 }
-/* div>input.err-name{
-  padding-right:20px;
-  background:url(../images/login/uname-error.png) no-repeat scroll right center transparent;
-}
-div>input.err-pwd{
-  padding-right:20px;
-  background:url(../images/login/upwd-error.png) no-repeat scroll right center transparent;
-} */
 div.close{
   display: inline-block;
 }
 .login-btn{
   background:linear-gradient(to right,#0ff,#f0f);
   border:0;
+  border-radius: 23.5px;
   line-height: 2.2rem;
 }
 .login-btn:hover{
@@ -65,9 +58,13 @@ div.close{
 a>img.w-5{
   width:3rem;
 }
-
-.img1{
+.yz-pass{
   position:absolute;
   top:10px;left:293px;
-  /* display:none; */
+  display:none;
+}
+.yz-error{
+  position:absolute;
+  top:10px;left:293px;
+  display:block;
 }
