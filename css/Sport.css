@@ -4,12 +4,12 @@ body{
   min-width: 1000px;
   font-family: "microsoft yahei";
 }
-.head-bg{
+.head-bg>ul{
   display: flex;
   flex-direction: row;
   flex: 1;
   justify-content: space-between;
-  padding:0.2rem;
+  padding:0.2rem 1rem;
   background: url(../images/sport/bg.png);
 }
 .l-logo{margin-top:1.3rem}
@@ -19,10 +19,31 @@ li{
   align-items: center;
 }
 li>a.head-a{
-  line-height: 60px;
+  line-height: 50px;
   font-style: oblique;
   font-weight: bolder;
   color:#838383;
   text-decoration: none;
   background-color: transparent;
+}
+ul>li>a>ul{
+  clear:both;
+  position:absolute;
+  top:60px;
+  height:0px;
+  opacity:0;
+  overflow:hidden;
+  transition:all .3s linear;
+}
+ul>li>a>ul>li{
+  display:block;
+  float: left;
+  background-color:#fff;
+  text-align:left;
+  width:120px;
+  height:2rem; line-height:2rem;
+}
+ul>li>a:hover>ul{
+  opacity:1;
+  height:2rem;
 }
