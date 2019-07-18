@@ -12,6 +12,23 @@ body{
   padding:0.2rem 1rem;
   background: url(../images/sport/bg.png);
 }
+#banner {
+	width:500px;
+	height:300px;
+	overflow:hidden
+}
+#banner ul {
+	height:100%;
+}
+#banner ul li {
+	width:500px;
+	height:100%;
+	float:left
+}
+#banner ul li img {
+	width:100%;
+	height:100%;
+}
 .l-logo{margin-top:1.3rem}
 li{
   list-style: none;
@@ -44,6 +61,11 @@ ul>li>a>ul>li{
   height:2rem; line-height:2rem;
 }
 ul>li>a:hover>ul{
+  position: absolute;
   opacity:1;
   height:2rem;
+  z-index: 10;
+}
+.head-bg>ul>li>#index:hover{
+  color:red;
 }
