@@ -96,9 +96,26 @@ div>ul.foot>li.right{
   padding-left: 1rem;
   padding-right: 1rem;
 }
+div.fo{position: relative;}
 div.foo{
-  background: rgb(78, 78, 78) repeat-x;
-  height: 3rem;
-  position: absolute;
-  top:0px;
+  background: #1b1b1b repeat-x;
+	height: 5rem;
+	width: 100%;
+	position: absolute;
+	top:0;
+}
+div.foo>ul>li>a{
+	line-height: 5rem;
+	color:#888b85;
+	text-decoration: none;
+	font-family:"microsoft yahei";
+}
+ul.foot>li.right{position: relative;}
+#qr{
+	position: absolute;
+	top:-130px;left:-40px;
+	display: none;
+}
+div.foo>ul>li>a:hover{
+	color:#fff;
 }
