@@ -1,7 +1,25 @@
 *{margin:0;padding:0}
-body{box-sizing: border-box;}
+body{
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+.w-80{
+  width: 730px;
+}
+.mr-7{
+  margin-right:7rem;
+}
+.mr-8{
+  margin-right: 8.8rem;
+}
 ul{
   list-style: none;
+}
+li,a{
+  color:#212529;
+}
+a:hover{
+  color:red;
 }
 .icon-w{
   width: 100%;
@@ -54,6 +72,16 @@ ul>li>ul>li:hover{
 div>div>ul>li.cars{
   float: left;
   margin-right: 3rem;
+}
+div>div>ul>li.a4s>img{
+  width: 90px;
+}
+div>div>ul>li.a4s{
+  border-bottom: 1px solid #aaa;
+  margin: 15px 0;
+}
+div>div>ul.carlist:first-child{
+  border-top: 1px solid #aaa;
 }
 @media (max-width:767px) {
   div>ul#head-ul{
