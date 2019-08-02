@@ -25,7 +25,7 @@ ul>li{
 }
 .fleft{
   position: absolute;
-  top:4rem;
+  top:10rem;
   left:4rem;
   z-index: 99;
 }

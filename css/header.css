@@ -1,4 +1,4 @@
-*{margin:0;padding:0}
+*{margin:0;padding:0 !important}
 body{
   box-sizing: border-box;
   font-family: sans-serif;
@@ -82,6 +82,14 @@ div>div>ul>li.a4s{
 }
 div>div>ul.carlist:first-child{
   border-top: 1px solid #aaa;
+}
+#car{
+  opacity: 0;
+  transition: all .5s linear;
+}
+span#close:hover{
+  transform: scale(1.3);
+  transition: all .3s linear;
 }
 @media (max-width:767px) {
   div>ul#head-ul{
