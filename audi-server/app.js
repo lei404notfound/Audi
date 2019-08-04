@@ -29,7 +29,7 @@ server.use(session({
   resave:true,            //请求时更新数据
   saveUninitialized:true  //保存初始数据
 }));
-server.use(express.static("html"));
+server.use(express.static("public"));
 //5:启动监听
 server.listen(3000);
 server.get("/login",(req,res)=>{

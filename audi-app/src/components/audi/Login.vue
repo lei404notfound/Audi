@@ -4,13 +4,13 @@
       <div class="login p-r">
         <h2 class="h-center my-4">登录</h2>
         <p class="my-4">用户名</p>
-        <div class="position-relative">
-          <input class="w-100 py-2 err-name" name="uname" type="text" placeholder="请输入用户名">
+        <div class="position-relative show">
+          <input class="w-100 py-2 err-name" name="uname" type="text" placeholder="请输入用户名" v-model="uname">
           <img src="../../images/login/uname-error.png" alt="" class="yz-pass">
         </div>
         <p class="my-4">密码</p>
-        <div  class="position-relative">
-          <input class="w-100 py-2 err-pwd" type="password" name="upwd" placeholder="请输入密码">
+        <div  class="position-relative show">
+          <input @change="login" class="w-100 py-2 err-pwd" type="password" name="upwd" placeholder="请输入密码" v-model="upwd">
           <img src="../../images/login/upwd-error.png" alt="" class="yz-pass">
         </div>
         <div class="a-right mt-3"><a href="javascript:;">忘记密码?</a></div>
@@ -33,7 +33,10 @@
 <script>
 export default {
   data(){
-    return {}
+    return {
+      uname:"",
+      upwd:""
+    }
   },
   methods:{
     login(){
@@ -70,6 +73,25 @@ export default {
         vali.call(this,reg);
         //调用公共的验证方法vali
       }
+      var uname=this.uname;
+      var upwd=this.upwd;
+      var url="login";
+      var obj={uname:uname,upwd:upwd};
+      this.axios.get(url,{params:obj}).then(res=>{
+        if(res.data.code==-1){
+          this.$toast({
+            message:"用户名或密码错误",
+            iconClass:"icon icon-denglushibai"
+          })
+        }else{
+          this.$toast({
+            message:"登录成功,自动进入首页",
+            duration: 3000,
+            iconClass:"icon icon-dengluchenggong"
+          })
+          this.$router.push('/Index')
+        }
+      })
     }
   }
 }
@@ -78,7 +100,7 @@ export default {
   *{margin:0;padding:0}
   body{
     font-size: 1rem;
-    font-family: "黑体";
+    font-family: "Microsoft YaHei";
     color:rgb(51, 51, 51);
     box-sizing: border-box;
   }
@@ -115,19 +137,30 @@ export default {
   div>input{
     border:0;
     outline:0;
-    border-bottom: 0.1rem solid #b9b9b9;
-  }
-  div>input:hover{
-    border-bottom: 0.1rem solid #1cc3e3;
   }
   div.close{
     display: inline-block;
   }
   .login-btn{
-    background:linear-gradient(to right,#0ff,#f0f);
-    border:0;
-    border-radius: 23.5px;
-    line-height: 2.2rem;
+    position: relative;
+    width: 100%;
+    height: 2.5rem;
+    border: 0;
+    border-radius: 1.25rem;
+    background: linear-gradient(75deg, #6d78ff, #00ffb8);
+    z-index: 1;
+  }
+  .login-btn::after{
+    content: '';
+    width: 100%;
+    height: 2rem;
+    position: absolute;
+    background: inherit;
+    top: 1rem;
+    left:0.5rem;
+    filter: blur(0.6rem);
+    opacity: 0.7;
+    z-index: -1;
   }
   .login-btn:hover{
     background:linear-gradient(to right,#f0f,#0ff);
@@ -144,6 +177,25 @@ export default {
     position:absolute;
     top:10px;left:293px;
     display:block;
+  }
+  .show {
+    border: 0;
+    outline: none;
+  }
+  .show:after {
+    border-bottom: 0 solid transparent;
+    transition: all 0.35s;
+    content: '';
+    position: absolute;
+    width: 0;
+  }
+  .show:after {
+    border-bottom: 2px solid rgb(120, 25, 150);
+    bottom: -10px;
+    left: 0px;
+  }
+  .show:hover:after {
+    width: 100%;
   }
 </style>
 

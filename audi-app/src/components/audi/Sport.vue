@@ -1,6 +1,6 @@
 <template>
-  <div style="overflow: hidden;">
-    <div @click="changeIndex" class="guding">
+  <div>
+    <div class="guding">
     <div class="head-bg">
     <ul>
       <li><a href="javascript:;"><img class="l-logo" src="../../images/sport/logo1.png" alt="一汽-大众"></a></li>
@@ -100,7 +100,7 @@
         <li class="right"><a href="javascript:;">
           <img src="../../images/sport/xl.png">
         </a></li>
-        <li class="right"><a href="javascript:;">
+        <li @mouseenter="changeIndex" class="right"><a href="javascript:;">
           <img id="qr" src="../../images/sport/qr.png">
           <img id="wx" src="../../images/sport/wx.png">
         </a></li>
@@ -113,6 +113,7 @@
   </div>
 </template>
 <script>
+import sport from "./js/sport.js"
 export default {
   data(){
     return {}
