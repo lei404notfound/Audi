@@ -12,6 +12,7 @@ Vue.use(MintUI)
 //4.将字体图标引入当前项目中
 import "./font/iconfont.css"
 import "./icon/login/iconfont.css"
+import "./icon/right/iconfont.css"
 //5.引入axios第三方ajax模块
 import axios from "axios"
 //6.配置axios基础路径

@@ -4,7 +4,7 @@
     <div class="head-bg">
     <ul>
       <li><a href="javascript:;"><img class="l-logo" src="../../images/sport/logo1.png" alt="一汽-大众"></a></li>
-      <li><a id="index" class="head-a" href="javascript:;">首页</a></li>
+      <li><a id="index" class="head-a" href="http://127.0.0.1:8080/#/Index">首页</a></li>
       <li>
         <a class="head-a list-open" href="javascript:;">运动车型
           <ul>

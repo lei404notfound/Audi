@@ -126,6 +126,7 @@ export default {
     padding:4rem 3rem;
     position: absolute;
     left:50%;top:50%;
+    border-radius: 2%;
     transform: translate(-50%,-50%);
   }
   .p-r{
@@ -156,9 +157,9 @@ export default {
     height: 2rem;
     position: absolute;
     background: inherit;
-    top: 1rem;
-    left:0.5rem;
-    filter: blur(0.6rem);
+    top: 1.5rem;
+    left:0;
+    filter: blur(1rem);
     opacity: 0.7;
     z-index: -1;
   }

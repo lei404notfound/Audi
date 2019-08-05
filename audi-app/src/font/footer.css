@@ -1,26 +1,22 @@
 .bg-dark{background: #4c4c4c !important;}
-a{
+ul.list-unstyled>li>a{
   text-decoration: none !important;
   color:#fff;
   font-size: 0.6rem;
 }
-a:hover{
+ul.list-unstyled>li>a:hover{
   color:#e24949;
 }
 .indiv{
   margin-top:3rem;
   padding-left:8rem;
 }
-.pic1{
-  width: 70.391px;
-  height: 50px;
-}
 .oneli{
   font-size:1rem;
   line-height:2.5rem;
   color:#555;
 }
-li:not(:first-child) a {
+ul.list-unstyled>li:not(:first-child) a {
   font-size: 0.9rem;
   line-height: 2rem;
   color:#555 !important;
