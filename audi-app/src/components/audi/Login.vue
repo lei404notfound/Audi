@@ -2,30 +2,34 @@
   <div id="app">
     <div class="bg-1">
       <div class="login p-r">
-        <h2 class="h-center my-4">登录</h2>
-        <p class="my-4">用户名</p>
-        <div class="position-relative show">
-          <input class="w-100 py-2 err-name" name="uname" type="text" placeholder="请输入用户名" v-model="uname">
-          <img src="../../images/login/uname-error.png" alt="" class="yz-pass">
+        <div style="text-align:center;font-size:25px;">
+          <span @click="reg" id="sp1">登录</span> | <span @click="log" id="sp2">注册</span>
         </div>
-        <p class="my-4">密码</p>
-        <div  class="position-relative show">
-          <input @change="login" class="w-100 py-2 err-pwd" type="password" name="upwd" placeholder="请输入密码" v-model="upwd">
-          <img src="../../images/login/upwd-error.png" alt="" class="yz-pass">
+        <div id="div2">
+          <p class="my-4">用户名</p>
+          <div class="position-relative show">
+            <input class="w-100 py-2 err-name" name="uname" type="text" placeholder="请输入用户名" v-model="uname">
+            <img src="../../images/login/uname-error.png" alt="" class="yz-pass">
+          </div>
+          <p class="my-4">密码</p>
+          <div  class="position-relative show">
+            <input @change="login" class="w-100 py-2 err-pwd" type="password" name="upwd" placeholder="请输入密码" v-model="upwd">
+            <img src="../../images/login/upwd-error.png" alt="" class="yz-pass">
+          </div>
         </div>
-        <div class="a-right mt-3"><a href="javascript:;">忘记密码?</a></div>
-        <div>
-          <a href="javascript:;">
-            <button class="btn login-btn w-100 my-4">登录</button>
-          </a>
-        </div>
-        <div class="h-center my-4">第三方登录</div>
-        <div class="w-100 h-center my-4">
-          <a href="javascript:;"><img class="w-5 mr-2" src="../../images/login/wx.png"></a>
-          <a href="javascript:;"><img class="w-5 mr-2" src="../../images/login/qq.png"></a>
-          <a href="javascript:;"><img class="w-5 mr-2" src="../../images/login/wb.png"></a>
-        </div>
-        <div class="h-center"><a href="#">立即注册</a></div>
+          <div class="a-right mt-3"><a href="javascript:;">忘记密码?</a></div>
+          <div>
+            <a href="javascript:;">
+              <button class="btn login-btn w-100 my-4">登录</button>
+            </a>
+          </div>
+          <div class="h-center my-4">第三方登录</div>
+          <div class="w-100 h-center my-4">
+            <a href="javascript:;"><img class="w-5 mr-2" src="../../images/login/wx.png"></a>
+            <a href="javascript:;"><img class="w-5 mr-2" src="../../images/login/qq.png"></a>
+            <a href="javascript:;"><img class="w-5 mr-2" src="../../images/login/wb.png"></a>
+          </div>
+          <div class="h-center"><a href="#">立即注册</a></div>
       </div>
     </div>
   </div>
@@ -92,6 +96,12 @@ export default {
           this.$router.push('/Index')
         }
       })
+    },
+    reg(){
+      $("#div2").css("transform","translate(0%,50%)").css("transition","1s").css("opacity","0");
+    },
+    log(){
+      $("#div2").css("transform","translate(0%,0%)").css("transition","1s").css("opacity","1");
     }
   }
 }
@@ -110,6 +120,11 @@ export default {
   a:hover{
     color:#7f67eb;
     text-decoration: none;
+  }
+  span:hover{
+    cursor: pointer;
+    color:#6d78ff;
+    transition: .3s;
   }
   div.bg-1{
     width: 100%;

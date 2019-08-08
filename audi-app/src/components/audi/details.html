@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../../../public/bootstrap.css">
+  <script src="../../../public/jquery.min.js"></script>
+  <script src="../../../public/popper.min.js"></script>
+  <script src="../../../public/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../../font/header.css">
+  <link rel="stylesheet" href="../../font/footer.css">
+  <title>Document</title>
+  <style>
+    .head .breadcrumb{
+      background: #fff;
+    }
+    .breadcrumb > li + li:before {
+      content: " > ";
+      padding: 0 5px;
+    }
+    ul li a:hover{
+      text-decoration: none;
+      color:indianred;
+    }
+    div.head{
+      display: flex;
+      height: 3rem;
+      line-height: 3rem;
+      justify-content: space-between;
+    }
+    div span.bigtit{
+      font-size: 1.4rem;
+      font-style: initial
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="head">
+      <span class="bigtit"><b>预约试驾</b></span>
+      <ul class="breadcrumb">
+        <li><a href="javascript:;">登录</a></li>
+        <li><a href="javascript:;">注册</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div>
+      <span>意向车型</span>
+      <select name="chexi" onchange="setCar(this,this.cars)">
+        <option value="0">选择车系</option>
+        <option value="A4">A4</option>
+        <option value="A5">A5</option>
+        <option value="A6">A6</option>
+        <option value="A7">A7</option>
+        <option value="Q3">Q3</option>
+        <option value="Q5">Q5</option>
+        <option value="Q7">Q7</option>
+        <option value="TT">TT</option>
+        <option value="R8">R8</option>
+        <option value="RS">RS</option>
+        <option value="e-tron">e-tron</option>
+      </select>
+      <select name="xinghao" id="xinghao">
+        <option value="0">选择型号</option>
+      </select>      
+    </div>
+  </div>
+  <script>
+    var chexi=new Object();
+    chexi["A4"]=new Array("A4 Sportback","A4 Limousine","A4 Cabriolet","S4 Limousine");
+    chexi["A5"]=new Array("A5 Sportback","A5 Limousine","A5 Cabriolet","S5 Limousine");
+    chexi["A6"]=new Array("A6 Sportback","A6 Limousine","A6 Cabriolet","S6 Limousine");
+    chexi["A7"]=new Array("A7 Sportback","A7 Limousine","A7 Cabriolet","S7 Limousine");
+    chexi["Q3"]=new Array("Q3 Sportback","Q3 Limousine","Q3 Cabriolet","Q3 Limousine");
+    chexi["Q5"]=new Array("Q5 Sportback","Q5 Limousine","Q5 Cabriolet","Q5 Limousine");
+    chexi["Q7"]=new Array("Q7 Sportback","Q7 Limousine","Q7 Cabriolet","Q7 Limousine");
+    chexi["TT"]=new Array("TT Sportback","TT Limousine","TT Cabriolet","TT Limousine");
+    chexi["R8"]=new Array("R8 Sportback","R8 Limousine","R8 Cabriolet","R8 Limousine");
+    chexi["RS"]=new Array("RS Sportback","RS Limousine","RS Cabriolet","RS Limousine");
+    chexi["e-tron"]=new Array("e-tron Sportback","e-tron Limousine","e-tron Cabriolet","e-tron Limousine");
+    function setCar(chexi,xinghao){
+      var cheVal,xingVal;
+      var i,ii;
+      cheVal=chexi.value;
+      xingVal=xinghao.value;
+      xinghao.length=1;
+      if(cheVal=='0') return; //如果下拉列表的value为0 => return
+      if(typeof(chexi[cheVal])=='undefined') return;  //如果下拉列表的value为0 => return
+      for(i=0; i<chexi[cheVal].length; i++){
+        ii = i+1;
+        xinghao.options[ii] = new Option();
+        xinghao.options[ii].text = chexi[cheVal][i];
+        xinghao.options[ii].value = chexi[cheVal][i];
+      }
+    }
+  </script>
+</body>
+</html>
