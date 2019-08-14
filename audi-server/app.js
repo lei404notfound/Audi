@@ -40,9 +40,9 @@ server.get("/login",(req,res)=>{
   var upwd = req.query.upwd;
   //2:sql:查询sql语句
   //数据库 库名 表名 列名 小写字母
-  var sql = "SELECT id FROM user WHERE uname = ? AND upwd= ? ";
+  var sql_log = "SELECT id FROM user WHERE uname = ? AND upwd= ? ";
   //3:json:{code:1,msg:"登录成功"}
-  pool.query(sql,[uname,upwd],(err,result)=>{
+  pool.query(sql_log,[uname,upwd],(err,result)=>{
      //执行sql语句回调函数
     if(err)throw err;
      //判断
@@ -58,3 +58,18 @@ server.get("/login",(req,res)=>{
     }
   })
 });
+//注册
+server.get("/register",(req,res)=>{
+  var uname=req.query.uname;
+  var upwd=req.query.upwd;
+  var sql_reg="INSERT INTO user (uname,upwd) VALUES (?,?)";
+  pool.query(sql_reg,[uname,upwd],(err,result)=>{
+    if(err) throw err;
+    console.log(result);
+    if(result.affectedRows<0){
+      res.send({code:-1,msg:"注册失败"});
+    }else{
+      res.send({code:1,msg:"注册成功"});
+    }
+  })
+})

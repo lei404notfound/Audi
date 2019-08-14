@@ -8,10 +8,13 @@
   <script src="../../../public/jquery.min.js"></script>
   <script src="../../../public/popper.min.js"></script>
   <script src="../../../public/bootstrap.min.js"></script>
+  <script src="./echarts.min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=g2UFK7R9l92Paqk0lfGOhcGvSUbScgl6"></script>
   <link rel="stylesheet" href="../../font/header.css">
   <link rel="stylesheet" href="../../font/footer.css">
   <title>Document</title>
   <style>
+    *{margin:0;padding:0}
     .head .breadcrumb{
       background: #fff;
     }
@@ -33,9 +36,191 @@
       font-size: 1.4rem;
       font-style: initial
     }
+    form select,select.times,input#uname,input.uphone{
+      width: 20rem;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      border: 1px solid #888;
+      border-radius: 2px;
+      outline: none;
+    }
+    body div.yxcx{
+      position: relative;
+    }
+    body div.yxjxs{
+      position: relative;
+    }
+    body div.xm{
+      position: relative;
+    }
+    body div.sjh{
+      position: relative;
+    }
+    body div.jhgcsj{
+      position: relative;
+    }
+    div.yxcx span.cxspan{
+      position: absolute;
+      left:0px;
+      top:10px;
+    }
+    div.yxjxs span.jxsspan{
+      position: absolute;
+      left:0px;
+      top:110px;
+    }
+    div.xm span.uname{
+      position: absolute;
+      left:0px;
+      top:210px;
+    }
+    div.sjh span#uphone{
+      position: absolute;
+      left:0px;
+      top:295px;
+    }
+    div.jhgcsj span.shopTime{
+      position: absolute;
+      left:0px;
+      top:358px;
+    }
+    div.yxcx select.chexisel{
+      position: absolute;
+      left:120px;
+      top:0px;
+    }
+    div.yxjxs select.jxss{
+      position: absolute;
+      left:120px;
+      top:100px;
+    }
+    div.xm input#uname{
+      position: absolute;
+      left:120px;
+      top:200px;
+    }
+    div.xm input#man{
+      position: absolute;
+      left:130px;
+      top:260px;
+    }
+    div.xm input#woman{
+      position: absolute;
+      left:230px;
+      top:260px;
+    }
+    div.sjh input.uphone{
+      position: absolute;
+      left:120px;
+      top:290px;
+    }
+    div.yxcx select.chexingsel{
+      position: absolute;
+      left:120px;
+      top:39px;
+    }
+    div.yxjxs select.jxsshi{
+      position: absolute;
+      left:120px;
+      top:139px;
+    }
+    div.jhgcsj select.times{
+      position: absolute;
+      left:120px;
+      top:350px;
+    }
+    div div#allmap{
+      position: absolute;
+      top:80px;
+      left:880px;
+      width: 650px;
+      height: 450px;
+    }
+    div input.iptSucc{
+      position: absolute;
+      top: 510px;
+      left: 520px;
+    }
+    div input.iptSucc a.iptA{
+      position: absolute;
+      top: 500px;
+      left: 225px;
+    }
+    div button#tijiao{
+      position: absolute;
+      top: 500px;
+      left: 700px;
+      width: 8rem;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      border-radius: 0;
+    }
+    div.xm input[type="radio"],label input.iptSucc{
+      position: absolute;
+      opacity: 0;
+      display: none;
+    }
+    label.sex_sel i.sex_opt{
+      display: inline-block;
+      position: relative;
+      width: 1.2rem;
+      height: 1.2rem;
+      border: 3px solid rgb(99, 99, 99);
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      vertical-align: -4px;
+      margin-right: 8px;
+    }
+    label input.iptSucc .tijiao{
+      display: inline-block;
+      position: relative;
+      width: 1rem;
+      height: 1rem;
+      border: 3px solid rgb(99, 99, 99);
+      background: #fff;
+      cursor: pointer;
+      vertical-align: -6px;
+    }
+    label.sex_sel input:checked+.sex_opt:after{
+      width: 0.7rem;
+      height: 0.7rem;
+      border: 3px solid rgb(99, 99, 99);
+      background: #fff;
+      border-radius: 50%;
+    }
+    label input.iptSucc .tijiao:after{
+      width: 0.7rem;
+      height: 0.7rem;
+      border: 3px solid rgb(99, 99, 99);
+      background: #fff;
+    }
+    label.sex_sel input[type="radio"]:checked+.sex_opt{
+      background-color: rgb(204,0,51);
+      cursor: pointer;
+      border: none;
+    }
+    label input:checked.iptSucc .tijiao{
+      background-color: rgb(204,0,51);
+      cursor: pointer;
+      border: none;
+    }
+    div.sex-Sel{
+      position: absolute;
+      top: 265px;
+      left: 120px;
+    }
+    div.xm span.reg_name{
+      position: absolute;
+      top: 242px;
+      left: 125px;
+      color:red;
+      font-size: 9px;
+    }
   </style>
 </head>
 <body>
+  <!-- 头 -->
   <div class="container">
     <div class="head">
       <span class="bigtit"><b>预约试驾</b></span>
@@ -45,40 +230,102 @@
       </ul>
     </div>
     <hr>
-    <div>
-      <span>意向车型</span>
-      <select name="chexi" onchange="setCar(this,this.cars)">
-        <option value="0">选择车系</option>
-        <option value="A4">A4</option>
-        <option value="A5">A5</option>
-        <option value="A6">A6</option>
-        <option value="A7">A7</option>
-        <option value="Q3">Q3</option>
-        <option value="Q5">Q5</option>
-        <option value="Q7">Q7</option>
-        <option value="TT">TT</option>
-        <option value="R8">R8</option>
-        <option value="RS">RS</option>
-        <option value="e-tron">e-tron</option>
+    <!-- 车型二级菜单 -->
+    <div class="yxcx">
+      <span class="cxspan">意向车型</span>
+      <form name="form1" action="" method="get">
+        <select class="chexisel" name="chexi" onchange="setCar(this,this.form.xinghao)">
+          <option value="0">车系</option>
+          <option value="A4">A4</option>
+          <option value="A5">A5</option>
+          <option value="A6">A6</option>
+          <option value="A7">A7</option>
+          <option value="Q3">Q3</option>
+          <option value="Q5">Q5</option>
+          <option value="Q7">Q7</option>
+          <option value="TT">TT</option>
+          <option value="R8">R8</option>
+          <option value="RS">RS</option>
+          <option value="e-tron">e-tron</option>
+        </select>
+        <select class="chexingsel" name="xinghao" id="xinghaos">
+          <option value="0">车型</option>
+        </select>
+      </form>
+    </div>
+    <!-- 省市二级菜单 -->
+    <div class="yxjxs">
+      <span class="jxsspan">意向经销商</span>
+      <form name="form2" action="" method="get">
+        <select class="jxss" name="jxssheng" id="jsxs" onchange="setJxs(this,this.form.jxsshi)">
+          <option value="0">经销商省</option>
+          <option value="sc">四川省</option>
+          <option value="zj">浙江省</option>
+        </select>
+        <select class="jxsshi" name="jxsshi" id="jxsshi">
+          <option value="0">经销商市</option>
+        </select>
+      </form>
+    </div>
+    <!-- 姓名 -->
+    <div class="xm">
+      <span class="uname">姓名</span>
+      <input id="uname" type="text" placeholder="请输入您的姓名">
+      <div><span class="reg_name">姓名不能为空</span></div>
+      <div class="sex-Sel">
+        <label class="sex_sel">
+          <input class="uphone" type="radio" name="sex"><i class="sex_opt"></i>男
+        </label>
+        <label class="sex_sel">
+          <input class="uphone" type="radio" name="sex"><i class="sex_opt"></i>女
+        </label>
+      </div>
+    </div>
+    <!-- 手机号 -->
+    <div class="sjh">
+      <span id="uphone">手机号</span>
+      <input class="uphone" type="text" placeholder="请填写您的手机号码">
+      <div></div>
+    </div>
+    <!-- 计划购车时间 -->
+    <div class="jhgcsj">
+      <span class="shopTime">计划购车时间</span>
+      <select name="time" id="time" class="times">
+        <option value="0">计划购车时间</option>
+        <option value="today">当天</option>
+        <option value="three">3天内</option>
+        <option value="week1">一周内</option>
+        <option value="week2">两周内</option>
+        <option value="month">一个月内</option>
+        <option value="month6">半年内</option>
+        <option value="year">一年以上</option>
       </select>
-      <select name="xinghao" id="xinghao">
-        <option value="0">选择型号</option>
-      </select>      
+    </div>
+    <!-- 地图 -->
+    <div>
+      <div id="allmap"></div>
+    </div>
+    <div>
+      <button id="tijiao" class="btn btn-dark">提交</button>
     </div>
   </div>
   <script>
-    var chexi=new Object();
-    chexi["A4"]=new Array("A4 Sportback","A4 Limousine","A4 Cabriolet","S4 Limousine");
-    chexi["A5"]=new Array("A5 Sportback","A5 Limousine","A5 Cabriolet","S5 Limousine");
-    chexi["A6"]=new Array("A6 Sportback","A6 Limousine","A6 Cabriolet","S6 Limousine");
-    chexi["A7"]=new Array("A7 Sportback","A7 Limousine","A7 Cabriolet","S7 Limousine");
-    chexi["Q3"]=new Array("Q3 Sportback","Q3 Limousine","Q3 Cabriolet","Q3 Limousine");
-    chexi["Q5"]=new Array("Q5 Sportback","Q5 Limousine","Q5 Cabriolet","Q5 Limousine");
-    chexi["Q7"]=new Array("Q7 Sportback","Q7 Limousine","Q7 Cabriolet","Q7 Limousine");
-    chexi["TT"]=new Array("TT Sportback","TT Limousine","TT Cabriolet","TT Limousine");
-    chexi["R8"]=new Array("R8 Sportback","R8 Limousine","R8 Cabriolet","R8 Limousine");
-    chexi["RS"]=new Array("RS Sportback","RS Limousine","RS Cabriolet","RS Limousine");
-    chexi["e-tron"]=new Array("e-tron Sportback","e-tron Limousine","e-tron Cabriolet","e-tron Limousine");
+    var chexis=new Object();
+    var jxsshengs=new Object();
+    chexis["A4"]=new Array("A4 Sportback","A4 Limousine","A4 Cabriolet","S4 Limousine","A4 Sportback","A4 Limousine","A4 Cabriolet","S4 Limousine");
+    chexis["A5"]=new Array("A5 Sportback","A5 Limousine","A5 Cabriolet","S5 Limousine");
+    chexis["A6"]=new Array("A6 Sportback","A6 Limousine","A6 Cabriolet","S6 Limousine");
+    chexis["A7"]=new Array("A7 Sportback","A7 Limousine","A7 Cabriolet","S7 Limousine");
+    chexis["Q3"]=new Array("Q3 Sportback","Q3 Limousine","Q3 Cabriolet","Q3 Limousine");
+    chexis["Q5"]=new Array("Q5 Sportback","Q5 Limousine","Q5 Cabriolet","Q5 Limousine");
+    chexis["Q7"]=new Array("Q7 Sportback","Q7 Limousine","Q7 Cabriolet","Q7 Limousine");
+    chexis["TT"]=new Array("TT Sportback","TT Limousine","TT Cabriolet","TT Limousine");
+    chexis["R8"]=new Array("R8 Sportback","R8 Limousine","R8 Cabriolet","R8 Limousine");
+    chexis["RS"]=new Array("RS Sportback","RS Limousine","RS Cabriolet","RS Limousine");
+    chexis["e-tron"]=new Array("e-tron Sportback","e-tron Limousine","e-tron Cabriolet","e-tron Limousine");
+    jxsshengs["sc"]=new Array("成都市","德阳市","广安市","广元市","眉山市","乐山市","宜宾市","泸州市","攀枝花市");
+    jxsshengs["zj"]=new Array("杭州市","丽水市","舟山市","金华市","温州市","嘉兴市","台州市","绍兴市","湖州市");
+    //车型二级菜单
     function setCar(chexi,xinghao){
       var cheVal,xingVal;
       var i,ii;
@@ -86,14 +333,38 @@
       xingVal=xinghao.value;
       xinghao.length=1;
       if(cheVal=='0') return; //如果下拉列表的value为0 => return
-      if(typeof(chexi[cheVal])=='undefined') return;  //如果下拉列表的value为0 => return
-      for(i=0; i<chexi[cheVal].length; i++){
+      if(typeof(chexis[cheVal])=='undefined') return;  //如果下拉列表的value为0 => return
+      for(i=0; i<chexis[cheVal].length; i++){
         ii = i+1;
         xinghao.options[ii] = new Option();
-        xinghao.options[ii].text = chexi[cheVal][i];
-        xinghao.options[ii].value = chexi[cheVal][i];
+        xinghao.options[ii].text = chexis[cheVal][i];
+        xinghao.options[ii].value = chexis[cheVal][i];
       }
     }
+    //省市二级菜单
+    function setJxs(jxssheng,jxsshi){
+      var shengVal,shiVal;
+      var j,jj;
+      shengVal=jxssheng.value;
+      shiVal=jxsshi.value;
+      jxsshi.length=1;
+      if(shengVal=='0') return; //如果下拉列表的value为0 => return
+      if(typeof(jxsshengs[shengVal])=='undefined') return;  //如果下拉列表的value为0 => return
+      for(j=0; j<jxsshengs[shengVal].length; j++){
+        jj = j+1;
+        jxsshi.options[jj] = new Option();
+        jxsshi.options[jj].text = jxsshengs[shengVal][j];
+        jxsshi.options[jj].value = jxsshengs[shengVal][j];
+      }
+    }
+    //调用百度地图api
+    var map = new BMap.Map("allmap");          
+    map.centerAndZoom(new BMap.Point(104.06,30.67), 12);
+    var local = new BMap.LocalSearch(map, {
+      renderOptions:{map: map}
+    });
+    local.search("奥迪");
   </script>
+  <script src="./js/details.js"></script>
 </body>
 </html>

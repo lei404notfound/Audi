@@ -11,6 +11,10 @@
   </div>
   <div class="icon-w">
     <span class="iconfont icon-Menu"></span>
+    <div>
+      <span>欢迎<a href="javascript:;">{{name}}</a></span>
+      <span><a href="javascript:;" @click="exit">注销登录</a></span>
+    </div>
   </div>
   <div class="row">
     <div class="col-12">
@@ -118,9 +122,19 @@
   </div>
 </template>
 <script>
+import {setCookie,delCookie, getCookie} from "./js/cookie.js"
 export default {
   data(){
-    return {}
+    return {
+      name:""
+    }
+  },
+  mounted(){
+    let uname=getCookie("uname");
+    this.name=uname;
+    if(uname==""){
+      this.$router.push("/Index")
+    }
   },
   methods:{
     show(){
@@ -140,8 +154,12 @@ export default {
           }
         })
       })
+    },
+    exit(){
+      delCookie("uname");
+      this.$router.push("/Login");
     }
-  }
+  },
 }
 </script>
 <style scoped>
@@ -167,6 +185,10 @@ export default {
   }
   a:hover{
     color:red;
+  }
+  div.icon-w div{
+     float:right;
+     margin:0 4rem;
   }
   .icon-w{
     width: 100%;

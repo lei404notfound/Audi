@@ -1,26 +1,25 @@
 <template>
   <div id="app">
     <div class="bg-1">
-      <div class="login p-r">
+      <!-- Login Page -->
+      <div class="login p-r" v-show="showLog">
         <div style="text-align:center;font-size:25px;">
-          <span @click="reg" id="sp1">登录</span> | <span @click="log" id="sp2">注册</span>
+          <span id="sp1">登录</span>
         </div>
         <div id="div2">
           <p class="my-4">用户名</p>
           <div class="position-relative show">
-            <input class="w-100 py-2 err-name" name="uname" type="text" placeholder="请输入用户名" v-model="uname">
-            <img src="../../images/login/uname-error.png" alt="" class="yz-pass">
+            <input class="w-100 py-2" name="uname" type="text" placeholder="请输入用户名" v-model="uname">
           </div>
           <p class="my-4">密码</p>
           <div  class="position-relative show">
-            <input @change="login" class="w-100 py-2 err-pwd" type="password" name="upwd" placeholder="请输入密码" v-model="upwd">
-            <img src="../../images/login/upwd-error.png" alt="" class="yz-pass">
+            <input class="w-100 py-2" type="password" name="upwd" placeholder="请输入密码" v-model="upwd">
           </div>
         </div>
           <div class="a-right mt-3"><a href="javascript:;">忘记密码?</a></div>
           <div>
             <a href="javascript:;">
-              <button class="btn login-btn w-100 my-4">登录</button>
+              <button @click="login" class="btn login-btn w-100 my-4">登录</button>
             </a>
           </div>
           <div class="h-center my-4">第三方登录</div>
@@ -29,79 +28,101 @@
             <a href="javascript:;"><img class="w-5 mr-2" src="../../images/login/qq.png"></a>
             <a href="javascript:;"><img class="w-5 mr-2" src="../../images/login/wb.png"></a>
           </div>
-          <div class="h-center"><a href="#">立即注册</a></div>
+          <div class="h-center">没有账号?<a href="#" @click="toReg">立即注册</a></div>
+      </div>
+      <!-- Register Page -->
+      <div class="login p-r" v-show="showReg">
+        <div style="text-align:center;font-size:25px;">
+          <span id="sp1">注册</span>
+        </div>
+        <div id="div2">
+          <p class="my-4">用户名</p>
+          <div class="position-relative show">
+            <input class="w-100 py-2" name="uname" type="text" placeholder="请输入用户名" v-model="newUname">
+          </div>
+          <p class="my-4">密码</p>
+          <div  class="position-relative show">
+            <input class="w-100 py-2" type="password" name="upwd" placeholder="请输入密码" v-model="newUpwd">
+          </div>
+          <p class="my-4">确认密码</p>
+          <div  class="position-relative show">
+            <input class="w-100 py-2" type="password" name="upwdToo" placeholder="请再次输入密码" v-model="upwdToo">
+          </div>
+        </div>
+          <div>
+            <a href="javascript:;">
+              <button @click="Register" class="btn login-btn w-100 my-4">注册</button>
+            </a>
+          </div>
+          <div class="h-center">已有账号?<a href="#" @click="toLog">立即登录</a></div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import {setCookie,getCookie} from "./js/cookie.js"
 export default {
   data(){
     return {
       uname:"",
-      upwd:""
+      upwd:"",
+      newUname:"",
+      newUpwd:"",
+      upwdToo:"",
+      showLog:true,
+      showReg:false,
     }
+  },
+  mounted(){
+    if(getCookie("uname")){this.$router.push("/Index")}
   },
   methods:{
     login(){
-      /*当文本框获得焦点时，清除文本框旁边的div的class*/
-      //1. 查找触发事件的元素
-      var txtName=document.getElementsByName("uname")[0];
-      var txtPwd=document.getElementsByName("upwd")[0];
-      //2. 绑定事件处理函数
-      /*文本框失去焦点，验证当前文本框的内容，修改提示信息
-      的样式*/
-      //为姓名文本框绑定失去焦点事件
-      txtName.onblur=function(){
-        //定义正则表达式
-        var reg=/^\s*$/;
-        //this->txtName
-        //调用公共的验证方法vali
-        vali.call(this,reg);
-      }
-      function vali(reg){
-        //查找当前文本框旁边的div
-        var img=this.nextElementSibling;
-        //如果正则验证文本框的内容通过就修改div的className为yz-pass
-        if(reg.test(this.value)==false){
-          img.className="yz-pass";
-        }else{
-          //否则就修改div的className为vali_fail
-          img.className="yz-error";
-        }
-      }
-      txtPwd.onblur=function(){
-        //定义正则表达式
-        var reg=/^\s*$/;
-        //this->txtPwd
-        vali.call(this,reg);
-        //调用公共的验证方法vali
-      }
       var uname=this.uname;
       var upwd=this.upwd;
       var url="login";
       var obj={uname:uname,upwd:upwd};
-      this.axios.get(url,{params:obj}).then(res=>{
-        if(res.data.code==-1){
-          this.$toast({
-            message:"用户名或密码错误",
-            iconClass:"icon icon-denglushibai"
-          })
-        }else{
-          this.$toast({
-            message:"登录成功,自动进入首页",
-            duration: 3000,
-            iconClass:"icon icon-dengluchenggong"
-          })
-          this.$router.push('/Index')
-        }
-      })
+      if(this.uname==""||this.upwd==""){
+        this.$toast("用户名和密码不能为空");
+      }else{
+        this.axios.get(url,{params:obj}).then((res)=>{
+          if(res.data.code==-1){
+            this.$toast("用户名或密码错误");
+          }else{
+            this.$toast("登录成功,即将进入主页");
+            setCookie("uname",this.uname,1000*300);
+            this.$router.push("/Index");
+            setTimeout(function(){
+              this.$router.push("/Index");
+            }.bind(this),1000);
+          }
+        })
+      }
     },
-    reg(){
-      $("#div2").css("transform","translate(0%,50%)").css("transition","1s").css("opacity","0");
+    Register(){
+      if(this.newUname==""||this.newUpwd==""||this.upwdToo==""){
+        this.$toast("用户名和密码不能为空");
+      }else if(this.newUpwd!=this.upwdToo){
+        this.$toast("两次输入的密码不匹配");
+      }else{
+        var url="register";
+        var obj={uname:this.newUname,upwd:this.newUpwd};
+        this.axios.get(url,{params:obj}).then((res)=>{
+          if(res.data.code==-1){
+            this.$toast("注册失败,请重新注册");
+          }else{
+            this.$toast("注册成功,请登录");
+          }
+        })
+      }
     },
-    log(){
-      $("#div2").css("transform","translate(0%,0%)").css("transition","1s").css("opacity","1");
+    toReg(){
+      this.showReg=true;
+      this.showLog=false;
+    },
+    toLog(){
+      this.showLog=true;
+      this.showReg=false;
     }
   }
 }
@@ -184,16 +205,6 @@ export default {
   a>img.w-5{
     width:3rem;
   }
-  .yz-pass{
-    position:absolute;
-    top:10px;left:293px;
-    display:none;
-  }
-  .yz-error{
-    position:absolute;
-    top:10px;left:293px;
-    display:block;
-  }
   .show {
     border: 0;
     outline: none;
@@ -214,5 +225,3 @@ export default {
     width: 100%;
   }
 </style>
-
-

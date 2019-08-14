@@ -92,11 +92,7 @@
     <div class="fo">
     <div class="foo">
       <ul class="foot">
-        <li class="left"><a href="javascript:;">预约试驾</a></li>
-        <li class="left"><a href="javascript:;">查询经销商</a></li>
-        <li class="left"><a href="javascript:;">一汽-大众奥迪</a></li>
-        <li class="left"><a href="javascript:;">联系我们</a></li>
-        <li class="left"><a href="javascript:;">版权说明</a></li>
+        <li v-for="ftext in foottext" class="left"><a href="javascript:;">{{ftext}}</a></li>
         <li class="right"><a href="javascript:;">
           <img src="../../images/sport/xl.png">
         </a></li>
@@ -116,7 +112,9 @@
 import sport from "./js/sport.js"
 export default {
   data(){
-    return {}
+    return {
+      foottext:["预约试驾","查询经销商","一汽-大众奥迪","联系我们","版权说明"]
+    }
   },
   methods:{
     changeIndex(){
