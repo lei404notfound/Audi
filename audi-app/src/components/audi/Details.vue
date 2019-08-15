@@ -13,35 +13,38 @@
       <!-- 二级联动菜单 -->
       <div class="row">
         <div class="col-5">
-          <span>意向车型</span>
+          <p class="sm-title">意向车型</p>
           <select name="" id="" v-model="chexiName">
+            <option value="请选择车系" v-for="(item1,index) in cars">{{item1.chexi}}</option>
             <option :value="item1" v-for="(item1,index) in cars">{{item1.chexi}}</option>
           </select>
-          <select name="" id="" v-model="chexingName">
-            <option :value="item1" v-for="(item1,index) in chexi.chexing">{{item1}}</option>
-          </select>
+          <p class="sm-title">意向经销商</p>
           <select name="" id="" v-model="shengName">
             <option :value="item2" v-for="(item2,index) in citys">{{item2.sheng}}</option>
           </select>
-          <span>意向经销商</span>
-          <select name="" id="" v-model="shiName">
-            <option :value="item2" v-for="(item2,index) in sheng.shi">{{item2}}</option>
-          </select>
-          <p>姓名</p>
-          <input type="text" class="name" @blur="reg_name">
-          <p v-show="showName">您的姓名不可为空</p>
-          <input type="radio" name="sex" id="man">
-          <input type="radio" name="sex" id="woman">
-          <p>手机号码</p>
-          <input type="text" class="phone" @blur="reg_phone">
-          <p v-show="showPhone">您的移动电话不可为空</p>
-          <p>计划购车时间</p>
-          <select name="" id="" v-model="payTime">
+          <p class="sm-title">姓名</p>
+          <input type="text" id="uname" class="name" @blur="reg_name">
+          <p v-show="showName" class="reg">您的姓名不可为空</p>
+          <div>
+            <label class="sex_sel">
+              <input class="uphone" type="radio" name="sex"><i class="sex_opt"></i>男
+            </label>
+            <label class="sex_sel">
+              <input class="uphone" type="radio" name="sex"><i class="sex_opt"></i>女
+            </label>
+          </div>
+          <p class="sm-title">手机号码</p>
+          <input type="text" id="uphone" class="phone" @blur="reg_phone">
+          <p v-show="showPhone" class="reg">您的移动电话不可为空</p>
+          <p class="sm-title">计划购车时间</p>
+          <select name="" id="" v-model="paytime">
             <option :value="item3" v-for="(item3,index) in payTime">{{item3}}</option>
           </select>
-          <input type="checkbox" name="" id="">
-          <p>同意隐私条款</p>
-          <mt-button>提交</mt-button>
+          <div id="pay_agree">
+            <input type="checkbox" name="check" v-model="disabled">
+            <span>同意隐私条款</span>
+          </div>
+          <button :disabled="!disabled">提交</button>
         </div>
         <div class="col-7">
           <div id="allmap"></div>
@@ -55,57 +58,59 @@ export default {
   data(){
     return {
       chexi:"",
-      chexing:"",
       sheng:"",
-      shi:"",
+      disabled:false,
       chexiName:"",
-      chexingName:"",
       shengName:"",
-      shiName:"",
-      payTime:"",
+      paytime:"",
       showName:false,
       showPhone:false,
       cars:[
         {
           chexi:"A4",
-          chexing:["A4L","A4 quattro","S4","RS4 Avant"],
         },
         {
           chexi:"A5",
-          chexing:["A5 Sport","S5 Sport","A5 quattro","S5 Sport","S5 Avant"],
         },
         {
           chexi:"A6",
-          chexing:["A6L","A6 quattro","S6","RS6 Avant"],
         },
         {
           chexi:"A7",
-          chexing:["A7 Sport","S7 Sport","A7 quattro","S7 Sport","S7 Avant"],
         },
         {
           chexi:"A8",
-          chexing:["A8 Sport","A8 quattro","S8 Sport","S8 Avant"],
         },
         {
           chexi:"Q5",
-          chexing:["Q5 Sport","Q5 quattro","Q5L Sport","Q5L Avant"],
         },
         {
           chexi:"Q7",
-          chexing:["Q7 Sport","Q7L Sport"],
         },
         {
           chexi:"R8",
-          chexing:["R8 quattro","R8 Avant"]
       }],
       citys:[
         {
           sheng:"四川省",
-          shi:["成都市","德阳市","广安市","广元市","眉山市","乐山市","宜宾市","泸州市"],
         },
         {
           sheng:"浙江省",
-          shi:["杭州市","丽水市","舟山市","金华市","温州市","嘉兴市","台州市","绍兴市","湖州市"],
+        },
+        {
+          sheng:"重庆市",
+        },
+        {
+          sheng:"陕西省"
+        },
+        {
+          sheng:"汉东省"
+        },
+        {
+          sheng:"广东省"
+        },
+        {
+          sheng:"辽宁省"
         }
       ],
       payTime:["当天","3天内","一周内","两周内","一个月内","半年内","一年以上"]
@@ -113,15 +118,21 @@ export default {
   },
   methods:{
     reg_name(){
-      var iptName=document.getElementsByClassName("name");
+      var iptName=document.getElementById("uname");
       if(iptName.value==""){
-        showName=true;
+        console.log(iptName.value);
+        this.showName=true;
+      }else{
+        this.showName=false;
       }
     },
     reg_phone(){
-      var iptPhone=document.getElementsByClassName("phone");
+      var iptPhone=document.getElementById("uphone");
       if(iptPhone.value==""){
-        showPhone=true;
+        console.log(iptPhone.value);
+        this.showPhone=true;
+      }else{
+        this.showPhone=false;
       }
     }
   }
@@ -149,12 +160,64 @@ ul li a:hover{
   color:#cc0033;
 }
 select,input.name,input.phone{
-  width: 18rem;
+  width: 22rem;
   height: 2.5rem;
   line-height: 2.5rem;
   border: 1px solid #888;
   border-radius: 2px;
   outline: none;
+}
+
+div.col-5 p.reg{
+  color:#cc0033;
+  font-size: 0.6rem;
+}
+div.col-5 button{
+  position:relative;
+  right:-255px;
+  background-color: #000;
+  padding: 0.5rem 2rem;
+  border: none;
+  color:#fff;
+  transition: .3s
+}
+div#pay_agree{
+  position: relative;
+  width: 60%;
+  top: 1.8rem;
+}
+div.col-5 button:hover{
+  background-color: #363636;
+  transition: .3s;
+}
+div.col-5 button:disabled{
+  background-color: rgb(201, 201, 201);
+}
+.sm-title{
+  margin-top: .4rem;
+  margin-bottom: .4rem;
+}
+div input[type="radio"],label input{
+  position: absolute;
+  opacity: 0;
+  display: none;
+}
+label.sex_sel i.sex_opt{
+  display: inline-block;
+  position: relative;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 3px solid rgb(99, 99, 99);
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  vertical-align: -4px;
+  margin-right: 8px;
+}
+label.sex_sel input[type="radio"]:checked+.sex_opt{
+  background-color: rgb(204,0,51);
+  cursor: pointer;
+  border: 1px solid #000;
 }
 </style>
 
