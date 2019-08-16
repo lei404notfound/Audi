@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header></Header>
   <!--banner部分-->
   <div class="bg">
     <div class="fleft">
@@ -212,19 +211,12 @@
         <a href="#">查看详情</a>
       </div>
     </div>
-    <Footer></Footer>
   </div>
 </template>
 <script>
-import Header from "./Header"
-import Footer from "./Footer"
 export default {
   data(){
     return {}
-  },
-  components:{
-    Header,
-    Footer
   }
 }
 </script>

@@ -1,8 +1,34 @@
 <template>
  <div class="app-container">
-    <router-view></router-view>
+    <head-er v-if="header_show"></head-er>
+    <router-view v-on:header="header" v-on:footer="footer"></router-view>
+    <foot-er v-if="footer_show"></foot-er>
  </div>
 </template>
+<script>
+import Header from "./components/audi/Header"
+import Footer from "./components/audi/Footer"
+export default {
+    data(){
+        return {
+            header_show:true,
+            footer_show:true
+        }
+    },
+    components:{
+        "head-er":Header,
+        "foot-er":Footer
+    },
+    methods:{
+        header(bool){
+            this.header_show=bool;
+        },
+        footer(bool){
+            this.footer_show=bool;
+        }
+    }
+}
+</script>
 
 <style>
    .app-container{
@@ -10,7 +36,6 @@
      padding-bottom:0;
      overflow-x:hidden;
    }
-
  .mui-bar-tab .mui-tab-item-tao.mui-active {
     color: #007aff;
  }

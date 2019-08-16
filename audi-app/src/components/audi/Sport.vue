@@ -116,6 +116,11 @@ export default {
       foottext:["预约试驾","查询经销商","一汽-大众奥迪","联系我们","版权说明"]
     }
   },
+  components:{},
+  created(){
+    this.$emit("header",false);
+    this.$emit("footer",false);
+  },
   methods:{
     changeIndex(){
       $("#wx").mouseenter(function() {
@@ -125,7 +130,7 @@ export default {
       $("#qr").css("display","none");
       });
     }
-  }
+  },
 }
 </script>
 <style scoped>

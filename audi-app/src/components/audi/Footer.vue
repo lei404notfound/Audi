@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="foot-er">
     <div class="container-fluid p-0 ml-3">
   <div class="row bg-light">
     <div class="col-lg-2 col-md-4 col-sm-3 p-0">

@@ -76,6 +76,11 @@ export default {
   mounted(){
     if(getCookie("uname")){this.$router.push("/Index")}
   },
+  components:{},
+  created(){
+    this.$emit("header",false);
+    this.$emit("footer",false);
+  },
   methods:{
     login(){
       var uname=this.uname;
@@ -112,6 +117,8 @@ export default {
             this.$toast("注册失败,请重新注册");
           }else{
             this.$toast("注册成功,请登录");
+            this.showReg=false;
+            this.showLog=true;
           }
         })
       }

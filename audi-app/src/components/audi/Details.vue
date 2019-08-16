@@ -18,7 +18,7 @@
             <option value="请选择车系" v-for="(item1,index) in cars">{{item1.chexi}}</option>
             <option :value="item1" v-for="(item1,index) in cars">{{item1.chexi}}</option>
           </select>
-          <p class="sm-title">意向经销商</p>
+          <p class="sm-title">所在省份</p>
           <select name="" id="" v-model="shengName">
             <option :value="item2" v-for="(item2,index) in citys">{{item2.sheng}}</option>
           </select>
@@ -41,13 +41,17 @@
             <option :value="item3" v-for="(item3,index) in payTime">{{item3}}</option>
           </select>
           <div id="pay_agree">
-            <input type="checkbox" name="check" v-model="disabled">
-            <span>同意隐私条款</span>
+            <label class="sex_sel">
+              <input type="checkbox" name="check" v-model="disabled"><i class="sel_i"></i>
+              <span>同意隐私条款</span>
+            </label>
           </div>
           <button :disabled="!disabled">提交</button>
         </div>
-        <div class="col-7">
-          <div id="allmap"></div>
+        <div id="myMap" class="col-7">
+          <baidu-map center="成都" class="bm-view">
+            <bm-city-list anchor="BMAP_ANCHOR_TOP_LEFT"></bm-city-list>
+          </baidu-map>
         </div>
       </div>
     </div>
@@ -155,9 +159,12 @@ div.container{
   content: " > ";
   padding: 0 5px;
 }
-ul li a:hover{
+ul.breadcrumb li a:hover{
   text-decoration: none;
   color:#cc0033;
+}
+ul.breadcrumb li a{
+  color:#363636;
 }
 select,input.name,input.phone{
   width: 22rem;
@@ -202,7 +209,7 @@ div input[type="radio"],label input{
   opacity: 0;
   display: none;
 }
-label.sex_sel i.sex_opt{
+label.sex_sel i.sex_opt,label.sex_sel i.sel_i{
   display: inline-block;
   position: relative;
   width: 1.2rem;
@@ -218,6 +225,25 @@ label.sex_sel input[type="radio"]:checked+.sex_opt{
   background-color: rgb(204,0,51);
   cursor: pointer;
   border: 1px solid #000;
+}
+div#pay_agree input[type="checkbox"]{
+  position: absolute;
+  opacity: 0;
+  display: none;
+}
+label.sex_sel input[type="checkbox"]:checked+.sex_i{
+  background-color: rgb(204,0,51) !important;
+  cursor: pointer;
+  border: 1px solid #000;
+}
+div#myMap{
+  width: 100%;
+  height: 450px;
+}
+.bm-view{
+  width: 100%;
+  height: 450px;
+  margin: 2.2rem 0;
 }
 </style>
 
