@@ -1,6 +1,6 @@
 <template>
   <div id="head-er">
-    <div class="container-fluid p-0">
+    <div class="container p-0">
   <div class="d-flex justify-content-between mb-4">
     <a href="javascript:;">
       <img class="w-75" src="../../images/LOGO1.png">
@@ -164,6 +164,9 @@ export default {
 </script>
 <style scoped>
   *{margin:0;padding:0}
+  div.container{
+    margin: 0 auto;
+  }
   body{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -197,7 +200,6 @@ export default {
     width:90px; height:30px;
     border: 0;
     float:left;
-    margin-left: 8rem;
     line-height:30px;
     position: relative;
   }

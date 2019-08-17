@@ -145,7 +145,7 @@ export default {
 <style scoped>
 *{margin: 0;padding: 0}
 div.container{
-  margin: 0 auto;
+  margin: 4rem auto;
 }
 .container .head{
   display: flex;
@@ -204,12 +204,12 @@ div.col-5 button:disabled{
   margin-top: .4rem;
   margin-bottom: .4rem;
 }
-div input[type="radio"],label input{
+div input[type="radio"]{
   position: absolute;
   opacity: 0;
   display: none;
 }
-label.sex_sel i.sex_opt,label.sex_sel i.sel_i{
+label.sex_sel i.sex_opt{
   display: inline-block;
   position: relative;
   width: 1.2rem;
@@ -223,16 +223,6 @@ label.sex_sel i.sex_opt,label.sex_sel i.sel_i{
 }
 label.sex_sel input[type="radio"]:checked+.sex_opt{
   background-color: rgb(204,0,51);
-  cursor: pointer;
-  border: 1px solid #000;
-}
-div#pay_agree input[type="checkbox"]{
-  position: absolute;
-  opacity: 0;
-  display: none;
-}
-label.sex_sel input[type="checkbox"]:checked+.sex_i{
-  background-color: rgb(204,0,51) !important;
   cursor: pointer;
   border: 1px solid #000;
 }

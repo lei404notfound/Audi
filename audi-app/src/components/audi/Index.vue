@@ -91,7 +91,7 @@
       <div>
         <div class="fs">
           <h2>预约试驾</h2>
-          <button class="btn btn-dark a-size">即刻预约</button>
+          <button @click="toDetails" class="btn btn-dark a-size">即刻预约</button>
         </div>
         <img class="pic1" src="../../images/Book_a_testdrive.jpg">
       </div>
@@ -217,6 +217,11 @@
 export default {
   data(){
     return {}
+  },
+  methods:{
+    toDetails(){
+      this.$router.push("/Details");
+    }
   }
 }
 </script>
