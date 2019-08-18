@@ -218,6 +218,10 @@ export default {
   data(){
     return {}
   },
+  created(){
+    this.$emit("header",true);
+    this.$emit("footer",true);
+  },
   methods:{
     toDetails(){
       this.$router.push("/Details");

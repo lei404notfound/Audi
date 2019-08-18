@@ -60,7 +60,6 @@
   </div>
 </template>
 <script>
-import {setCookie,getCookie} from "./js/cookie.js"
 export default {
   data(){
     return {
@@ -72,9 +71,6 @@ export default {
       showLog:true,
       showReg:false,
     }
-  },
-  mounted(){
-    if(getCookie("uname")){this.$router.push("/Index")}
   },
   components:{},
   created(){
@@ -95,7 +91,6 @@ export default {
             this.$toast("用户名或密码错误");
           }else{
             this.$toast("登录成功,即将进入主页");
-            setCookie("uname",this.uname,1000*300);
             this.$router.push("/Index");
             setTimeout(function(){
               this.$router.push("/Index");

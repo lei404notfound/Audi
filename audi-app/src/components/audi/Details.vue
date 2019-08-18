@@ -120,6 +120,10 @@ export default {
       payTime:["当天","3天内","一周内","两周内","一个月内","半年内","一年以上"]
     }
   },
+  created(){
+    this.$emit("header",true);
+    this.$emit("footer",true);
+  },
   methods:{
     reg_name(){
       var iptName=document.getElementById("uname");
@@ -138,7 +142,7 @@ export default {
       }else{
         this.showPhone=false;
       }
-    }
+    },
   }
 }
 </script>

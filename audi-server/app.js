@@ -40,7 +40,7 @@ server.get("/login",(req,res)=>{
   var upwd = req.query.upwd;
   //2:sql:查询sql语句
   //数据库 库名 表名 列名 小写字母
-  var sql_log = "SELECT id FROM user WHERE uname = ? AND upwd= ? ";
+  var sql_log = "SELECT id,uname FROM user WHERE uname = ? AND upwd= ? ";
   //3:json:{code:1,msg:"登录成功"}
   pool.query(sql_log,[uname,upwd],(err,result)=>{
      //执行sql语句回调函数
@@ -52,7 +52,9 @@ server.get("/login",(req,res)=>{
       //1.将登录成功凭据保存在session中
       //result=[{id:1}]
       req.session.id=result[0].id;
+      req.session.uname=result[0].uname;
       console.log(req.session.id);
+      console.log(req.session.uname);
       //2.将成功消息发送到脚手架
       res.send({code:1,msg:"登录成功"})    
     }
@@ -72,4 +74,18 @@ server.get("/register",(req,res)=>{
       res.send({code:1,msg:"注册成功"});
     }
   })
+});
+//获取用户登录状态
+server.get("/getUname",(req,res)=>{
+  var id=req.session.id;
+  if(!id){
+    res.send({code:-1,msg:"未登录"});
+  }else{
+    var IDsql="SELECT uname FROM user WHERE id= ?";
+    pool.query(IDsql,[id],(err,result)=>{
+      if(err) throw err;
+      var uname=result[0].uname;
+      res.send({code:1,msg:"已登录",data:uname});
+    })
+  }
 })
