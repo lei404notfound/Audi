@@ -20,65 +20,23 @@
         <ul class="d-flex justify-content-between text-center list-unstyled text-light">
           <li class=" flex-nowrap">
           </li>
-          <li>
+          <li v-for="(item,index) in cx_list" :key="index">
             <a href="#">
               <img src="../../images/a4.png">
-              <p class="m-0">Audi A4
+              <p class="m-0">{{item}}
                 <ul class="d-flex justify-content-between text-center list-unstyled text-light d-none">
                 </ul>
               </p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="../../images/a5.png">
-              <p>Audi A5</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="../../images/a6.png">
-              <p>Audi A6</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="../../images/a7.png">
-              <p>Audi A7</p>
             </a>
           </li>
         </ul>
       </div>
       <div id="tab2" class="tab-pane">
         <ul class="d-flex justify-content-between text-center list-unstyled text-light">
-          <li>
+          <li v-for="(item,index) in cxlx_list" :key="index">
             <a class="nav-link p-0" href="#">
               <img src="../../images/lei1.png">
-              <p>Sportback</p>
-            </a>
-          </li>
-          <li>
-            <a class="nav-link p-0" href="#">
-              <img src="../../images/lei2.png">
-              <p>Limousine</p>
-            </a>
-          </li>
-          <li>
-            <a class="nav-link p-0" href="#">
-              <img src="../../images/lei3.png">
-              <p>Cabriolet</p>
-            </a>
-          </li>
-          <li>
-            <a class="nav-link p-0" href="#">
-              <img src="../../images/lei4.png">
-              <p>allroad quattro</p>
-            </a>
-          </li>
-          <li>
-            <a class="nav-link p-0" href="#">
-              <img src="../../images/lei5.png">
-              <p>Avant</p>
+              <p>{{item}}</p>
             </a>
           </li>
         </ul>
@@ -115,7 +73,7 @@
             <img class="w-100" src="../../images/teaser.jpg">
             <p>全新奥迪Q3 心无所限<br>
                 线上预定可享免费车辆商业险</p>
-            <a href="#">即刻预定></a>
+            <a href="#">查看详情</a><span class="iconfont icon-you2"></span>
           </li>
         </ul>
       </div>
@@ -125,9 +83,8 @@
         <ul>
           <li>
             <img class="w-100" src="../../images/teaser_q2l.jpg">
-            <p class="">全新奥迪Q2L<br>
-                不拘一格</p>
-            <a href="#">查看详情></a>
+            <p class="">全新奥迪Q2L<br>不拘一格</p>
+            <a href="#">查看详情</a><span class="iconfont icon-you2"></span>
           </li>
         </ul>
       </div>
@@ -139,7 +96,7 @@
               <img class="w-100" src="../../images/e-tron_gallery_01.jpg">
               <p>Audi e-tron<br>
                   全面开启预售</p>
-              <a href="#">查看详情></a>
+              <a href="#">查看详情</a><span class="iconfont icon-you2"></span>
             </li>
           </ul>
         </div>
@@ -149,7 +106,7 @@
         <ul>
           <li>
             <img class="w-100" src="../../images/teaser_03_20190131.jpg">
-            <a href="#">奥迪官方认证二手车 </a>
+            <a href="#">奥迪官方认证二手车 </a><span class="iconfont icon-you2"></span>
           </li>
         </ul>
         </div>
@@ -159,7 +116,7 @@
           <ul>
             <li>
               <img class="w-100" src="../../images/teaser_02_20190131.jpg">
-              <a href="#">奥迪在线4S店</a>
+              <a href="#">奥迪在线4S店</a><span class="iconfont icon-you2"></span>
             </li>
           </ul>
         </div>
@@ -169,7 +126,7 @@
           <ul>
             <li>
               <img class="w-100" src="../../images/audiservice.jpg">
-              <a href="#">售后服务</a>
+              <a href="#">售后服务</a><span class="iconfont icon-you2"></span>
             </li>
           </ul>
         </div>
@@ -190,25 +147,22 @@
         <a href="#">
           <img class="w-100" src="../../images/wx.jpg">
         </a>
-        <a href="#">奥迪官方<span class="span_f">微信</span>
+        <a href="#">奥迪官方<span class="span_f">微信</span><span class="iconfont icon-you2"></span>
             <br>随时掌握Audi最新动态。</a>
-        <a href="#">查看详情</a>
       </div>
       <div class="col-lg-4 col-sm-12 p-0 pr-lg-2 pr-sm-0">
         <a href="#">
           <img class="w-100" src="../../images/wb.jpg">
         </a>
-        <a href="#">奥迪官方<span class="span_f">微博</span>
+        <a href="#">奥迪官方<span class="span_f">微博</span><span class="iconfont icon-you2"></span>
           <br>实时活动即时更新，信息尽在掌握。</a>
-        <a href="#">查看详情</a>
       </div>
       <div class="col-lg-4 col-sm-12 p-0 pr-sm-0">
         <a href="#">
           <img class="w-100" src="../../images/zh.jpg">
         </a>
-        <a href="#">奥迪官方<span class="span_f">知乎</span>
+        <a href="#">奥迪官方<span class="span_f">知乎</span><span class="iconfont icon-you2"></span>
           <br>以专业的背景与知识，解开您对车的全部疑问。</a>
-        <a href="#">查看详情</a>
       </div>
     </div>
   </div>
@@ -216,7 +170,10 @@
 <script>
 export default {
   data(){
-    return {}
+    return {
+      cx_list:["Audi A4","Audi A5","Audi A6","Audi A7"],
+      cxlx_list:["Sportback","Limousine","Cabriolet","allroad quattro","Avant"],
+    }
   },
   created(){
     this.$emit("header",true);
@@ -310,7 +267,7 @@ export default {
     color:rgb(180, 120, 120);
   }
   .span_f:hover{
-    color:rgb(216, 64, 64);
+    color:rgb(204,0,51);
   }
 
   @media (min-width:1024px){

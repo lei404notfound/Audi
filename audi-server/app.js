@@ -84,7 +84,7 @@ server.get("/getUname",(req,res)=>{
     var IDsql="SELECT uname FROM user WHERE id= ?";
     pool.query(IDsql,[id],(err,result)=>{
       if(err) throw err;
-      var uname=result[0].uname;
+      var uname=req.session.uname;
       res.send({code:1,msg:"已登录",data:uname});
     })
   }

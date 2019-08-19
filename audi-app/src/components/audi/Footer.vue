@@ -144,9 +144,9 @@ export default {
     content: "";
   }
   .w-3{
-    width: 3%;
+    width: 25%;
     float: right;
-    margin-right: 1rem;
+    margin-right: .8rem;
   }
   .w-3:hover{
     background-color: rgb(218, 216, 216);

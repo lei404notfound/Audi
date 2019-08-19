@@ -11,9 +11,13 @@
   </div>
   <div class="icon-w">
     <span class="iconfont icon-Menu"></span>
-    <div>
-      <a href="javascript:;">{{uname}}</a>
+    <div v-show="show_name">
+      <a id="userName" href="javascript:;"></a>
       <span><a href="javascript:;" @click="exit">注销登录</a></span>
+    </div>
+    <div v-show="hide_name">
+      <a href="javascript:;" @click="toLog">请登录</a>
+      <span><a href="javascript:;" @click="toLog">注册</a></span>
     </div>
   </div>
   <div class="row">
@@ -70,26 +74,13 @@
   <div id="car" class="row">
     <div class="col-12 m-3">
       <ul>
-        <li class="cars"><a href="javascript:;">A4</a></li>
-        <li class="cars"><a href="javascript:;">A5</a></li>
-        <li class="cars"><a href="javascript:;">A6</a></li>
-        <li class="cars"><a href="javascript:;">A7</a></li>
-        <li class="cars"><a href="javascript:;">A8</a></li>
-        <li class="cars"><a href="javascript:;">Q5</a></li>
-        <li class="cars"><a href="javascript:;">Q7</a></li>
-        <li class="cars"><a href="javascript:;">TT</a></li>
-        <li class="cars"><a href="javascript:;">R8</a></li>
-        <li class="cars"><a href="javascript:;">RS</a></li>
-        <li class="cars"><a href="javascript:;">e-tron</a></li>
+        <li class="cars" v-for="(item,index) in head_carList" :key="index"><a href="javascript:;">{{item}}</a></li>
       </ul>
     </div>
     <div class="col-4 p-0">
       <div class="a4">
         <ul class="carlist w-100">
-          <li class="a4s"><a class="mr-7" href="javascript:;">RS 3 Limousine</a><img src="../../images/rs-1.png"></li>
-          <li class="a4s"><a class="mr-8" href="javascript:;">RS 4 Avant</a><img src="../../images/rs-2.png"></li>
-          <li class="a4s"><a class="mr-8" href="javascript:;">RS 5 Coupé</a><img src="../../images/rs-3.png"></li>
-          <li class="a4s"><a class="mr-7" href="javascript:;">RS 7 Sportback</a><img src="../../images/rs-4.png"></li>
+          <li class="a4s" v-for="(item,index) in head_lList" :key="index"><a class="mr-7" href="javascript:;">{{item}}</a><img src="../../images/rs-1.png"></li>
         </ul>
       </div>
     </div>
@@ -97,20 +88,17 @@
       <img class="w-80" src="../../images/a3sport.jpg">
       <div class="row">
         <div class="col-12">
-          <h2><a href="javascript:;">RS 3 Limousine</a>
+          <h2><a href="javascript:;">{{head_money.title}}</a>
             <span class="iconfont icon-you1"></span>
           </h2>
         </div>
         <div class="col-7">
-          <p>价格：起步价<b>286,800.00 RMB</b></p>
-          <p>全新奥迪A4L搭载的2.0TFSI®发动机其最大输出功率高达185KW，搭配7速S tronic变速器，百公里加速仅需5.9秒，最高车速可达250Km/h，让您在畅快无忧的旅途中感受澎湃动感的极速激情。</p>
+          <p>价格：起步价<b>{{head_money.start}}.00 RMB</b></p>
+          <p>{{head_money.details}}</p>
         </div>
         <div class="col-5">
           <ul class="ml-5">
-            <li class="pb-3"><a href="javascript:;">查询新车库存</a><span class="iconfont icon-you2"></span></li>
-            <li class="pb-3"><a href="javascript:;">定制您的奥迪</a><span class="iconfont icon-you2"></span></li>
-            <li class="pb-3"><a href="javascript:;">预约试驾</a><span class="iconfont icon-you2"></span></li>
-            <li class="pb-3"><a href="javascript:;">装备价格表</a><span class="iconfont icon-you2"></span></li>
+            <li class="pb-3" v-for="(item,index) in head_rList" :key="index"><a href="javascript:;">{{item}}</a><span class="iconfont icon-you2"></span></li>
             <span id="close" class="iconfont icon-iconfontclose
             "></span>
           </ul>
@@ -125,7 +113,17 @@
 export default {
   data(){
     return {
-      uname:""
+      uname: "",
+      show_name: false,
+      hide_name: true,
+      head_carList:["A4","A5","A6","A7","A8","Q5","Q7","TT","R8","RS","e-tron"],
+      head_lList:["RS 3 Limousine","RS 4 Avant","RS 5 Coupé","RS 7 Sportback"],
+      head_money:{
+        title:"RS 3 Limousine",
+        start:286800,
+        details:"全新奥迪A4L搭载的2.0TFSI®发动机其最大输出功率高达185KW，搭配7速S tronic变速器，百公里加速仅需5.9秒，最高车速可达250Km/h，让您在畅快无忧的旅途中感受澎湃动感的极速激情。"
+      },
+      head_rList:["查询新车库存","定制您的奥迪","预约试驾","装备价格表"],
     }
   },
   methods:{
@@ -147,17 +145,27 @@ export default {
         })
       })
     },
+    toLog(){
+      this.$router.push("/Login");
+    },
     exit(){
-      delCookie("uname");
+      sessionStorage.clear("uname");
       this.$router.push("/Login");
     }
   },
   created(){
-    if(sessionStorage.getItem("id")==""){
-      this.uname="请登录"
-    }else{
-      this.uname=sessionStorage.getItem("id")
-    }
+    this.axios.get("getUname").then(res=>{
+      if(res.data.data==undefined){
+        this.show_name=false;
+        this.hide_name=true;
+        $("a#userName").html("")
+      }else{
+        this.show_name=true;
+        this.hide_name=false;
+        var user=document.getElementsByName("get_uname");
+        $("a#userName").html(`欢迎 ${res.data.data}`)
+      }
+    })
   }
 }
 </script>
