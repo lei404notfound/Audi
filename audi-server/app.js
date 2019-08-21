@@ -88,4 +88,31 @@ server.get("/getUname",(req,res)=>{
       res.send({code:1,msg:"已登录",data:uname});
     })
   }
+});
+//获取首页车型列表图片及车型名
+server.get("/carList",(req,res)=>{
+  var fid=req.query.fid;
+  var sql="SELECT fname,fimg FROM car_family WHERE fid IN(3,5,6,9) GROUP BY fid";
+  pool.query(sql,[fid],(err,result)=>{
+    if(err) throw err;
+    res.send({code:1,msg:"查询成功",data:result});
+  })
+});
+//获取首页车型类型列表图片及类型名
+server.get("/carLei",(req,res)=>{
+  var fid=req.query.fid;
+  var sql="SELECT fname,fimg FROM car_family WHERE fid IN(11,4,16,7,14) GROUP BY fid"
+  pool.query(sql,[fid],(err,result)=>{
+    if(err) throw err;
+    res.send({code:1,msg:"查询成功",data:result})
+  })
+})
+//首页banner图
+server.get("/getBanner",(req,res)=>{
+  var tid=req.query.tid;
+  var sql="SELECT tname,ttitle,tpic FROM car_top WHERE tid = 0"
+  pool.query(sql,[tid],(err,result)=>{
+    if(err) throw err;
+    res.send({code:1,msg:"查询成功",data:result})
+  })
 })

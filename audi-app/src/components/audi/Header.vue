@@ -80,7 +80,7 @@
     <div class="col-4 p-0">
       <div class="a4">
         <ul class="carlist w-100">
-          <li class="a4s" v-for="(item,index) in head_lList" :key="index"><a class="mr-7" href="javascript:;">{{item}}</a><img src="../../images/rs-1.png"></li>
+          <li class="a4s" v-for="(item,index) in head_lList" :key="index"><a class="ml-3" href="javascript:;">{{item}}</a></li>
         </ul>
       </div>
     </div>
@@ -265,6 +265,8 @@ export default {
     opacity: 0;
     background-color: #fff;
     position: absolute;
+    right: 10rem;
+    left: 10rem;
     transition: all .5s linear;
     z-index: 20;
   }

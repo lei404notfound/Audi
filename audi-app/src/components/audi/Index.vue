@@ -3,13 +3,13 @@
   <!--banner部分-->
   <div class="bg">
     <div class="fleft">
-      <h1 class="title">Audi e-tron</h1>
-      <p class="font-weight-bold m-5">邀你创享未来</p>
-      <button class="btn btn-dark">
+      <h1 class="title">Audi {{banner[0].tname}}</h1>
+      <p class="font-weight-bold my-5">{{banner[0].ttitle}}</p>
+      <button class="btn btn-light">
         <a class="text-dark a-size" href="#">查看详情</a>
       </button>
     </div>
-    <img class="d-block w-100 pic1 mb-5" src="../../images/banner_pc_1.jpg">
+    <img class="d-block w-100 pic1 mb-5" :src="banner[0].tpic">
   </div>
   <ul class="nav nav-tabs">
     <li class="nav-item px-3"><a class="nav-link active text-dark font_small bbr p-0 mt-3" data-toggle="tab" href="#tab1">车型</a></li>
@@ -20,10 +20,10 @@
         <ul class="d-flex justify-content-between text-center list-unstyled text-light">
           <li class=" flex-nowrap">
           </li>
-          <li v-for="(item,index) in cx_list" :key="index">
+          <li v-for="(item,index) in carList" :key="index">
             <a href="#">
-              <img src="../../images/a4.png">
-              <p class="m-0">{{item}}
+              <img :src="item.fimg">
+              <p class="m-0">{{item.fname}}
                 <ul class="d-flex justify-content-between text-center list-unstyled text-light d-none">
                 </ul>
               </p>
@@ -33,10 +33,10 @@
       </div>
       <div id="tab2" class="tab-pane">
         <ul class="d-flex justify-content-between text-center list-unstyled text-light">
-          <li v-for="(item,index) in cxlx_list" :key="index">
+          <li v-for="(item,index) in carLei" :key="index">
             <a class="nav-link p-0" href="#">
-              <img src="../../images/lei1.png">
-              <p>{{item}}</p>
+              <img :src="item.fimg">
+              <p>{{item.fname}}</p>
             </a>
           </li>
         </ul>
@@ -171,13 +171,25 @@
 export default {
   data(){
     return {
-      cx_list:["Audi A4","Audi A5","Audi A6","Audi A7"],
-      cxlx_list:["Sportback","Limousine","Cabriolet","allroad quattro","Avant"],
+      banner:[{}],
+      carList:[{},{},{},{}],
+      carLei:[{},{},{},{},{}]
     }
   },
   created(){
     this.$emit("header",true);
     this.$emit("footer",true);
+    var obj1={fn:"fname",fi:"fimg"};
+    var obj2={tn:"tname",tt:"ttitle",tp:"tpic"};
+    this.axios.get("/carList",{params:obj1}).then(res=>{
+      this.carList=res.data.data;
+    this.axios.get("/carLei",{params:obj1}).then(res=>{
+      this.carLei=res.data.data;
+    this.axios.get("/getBanner",{params:obj2}).then(res=>{
+      this.banner=res.data.data;
+    })
+    })
+    })
   },
   methods:{
     toDetails(){
@@ -187,9 +199,8 @@ export default {
 }
 </script>
 <style scoped>
-  .container-fluid {
-    padding-right:0px;
-    padding-left: 0px;
+  .container-fluid{
+    padding: 0;
   }
   a{
     font-size: 1rem;
@@ -201,6 +212,12 @@ export default {
   }
   ul>li>a>img:hover{
     transform: scale(1.1);
+  }
+  div.fleft h1.title{
+    color:#fff;
+  }
+  div.fleft p.font-weight-bold{
+    color:#fff;
   }
   ul{
     margin: 0;
@@ -247,11 +264,9 @@ export default {
     position: relative;
   }
   .btn-light{
-    background-color: #000 !important;
     border: 1px solid #fff;
-    color:#fff;
     width: 15rem;
-    height:4.5rem;
+    height:4rem;
     border-radius: 0;
   }
   .big_p{
