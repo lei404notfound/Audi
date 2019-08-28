@@ -256,5 +256,3 @@ export default {
     color:#fff;
   }
 </style>
-
-

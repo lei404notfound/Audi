@@ -14,31 +14,30 @@
       <div class="row">
         <div class="col-5">
           <p class="sm-title">意向车型</p>
-          <select name="" id="" v-model="chexiName">
-            <option value="请选择车系" v-for="(item1,index) in cars">{{item1.chexi}}</option>
-            <option :value="item1" v-for="(item1,index) in cars">{{item1.chexi}}</option>
+          <select name="" id="" v-model="cid">
+            <option v-bind:value="item1.cid" v-for="(item1,index) in cars" :key="index">{{item1.chexi}}</option>
           </select>
           <p class="sm-title">所在省份</p>
-          <select name="" id="" v-model="shengName">
-            <option :value="item2" v-for="(item2,index) in citys">{{item2.sheng}}</option>
+          <select name="" id="" v-model="sid">
+            <option v-bind:value="item2.sid" v-for="(item2,index) in citys" :key="index">{{item2.sheng}}</option>
           </select>
           <p class="sm-title">姓名</p>
-          <input type="text" id="uname" class="name" @blur="reg_name">
+          <input type="text" id="uname" v-model="oname" class="name" @blur="reg_name">
           <p v-show="showName" class="reg">您的姓名不可为空</p>
           <div>
             <label class="sex_sel">
-              <input class="uphone" type="radio" name="sex"><i class="sex_opt"></i>男
+              <input class="uphone" type="radio"><i class="sex_opt"></i>男
             </label>
             <label class="sex_sel">
-              <input class="uphone" type="radio" name="sex"><i class="sex_opt"></i>女
+              <input class="uphone" type="radio"><i class="sex_opt"></i>女
             </label>
           </div>
           <p class="sm-title">手机号码</p>
-          <input type="text" id="uphone" class="phone" @blur="reg_phone">
+          <input type="text" v-model="ophone" id="uphone" class="phone" @blur="reg_phone">
           <p v-show="showPhone" class="reg">您的移动电话不可为空</p>
           <p class="sm-title">计划购车时间</p>
-          <select name="" id="" v-model="paytime">
-            <option :value="item3" v-for="(item3,index) in payTime">{{item3}}</option>
+          <select name="" id="" v-model="pid">
+            <option v-for="(item3,index) in payTime" :key="index" v-bind:value="item3.pid">{{item3.time}}</option>
           </select>
           <div id="pay_agree">
             <label class="sex_sel">
@@ -46,7 +45,7 @@
               <span>同意隐私条款</span>
             </label>
           </div>
-          <button :disabled="!disabled">提交</button>
+          <button :disabled="!disabled" @click="Submit">提交</button>
         </div>
         <div id="myMap" class="col-7">
           <baidu-map center="成都" class="bm-view">
@@ -63,61 +62,111 @@ export default {
     return {
       chexi:"",
       sheng:"",
+
+      cid:"",
+      sid:"",
+      oname:"",
+      ophone:"",
+      pid:"",
+
       disabled:false,
       chexiName:"",
       shengName:"",
-      paytime:"",
       showName:false,
       showPhone:false,
       cars:[
         {
+          cid:1,
           chexi:"A4",
         },
         {
+          cid:2,
           chexi:"A5",
         },
         {
+          cid:3,
           chexi:"A6",
         },
         {
+          cid:4,
           chexi:"A7",
         },
         {
+          cid:5,
           chexi:"A8",
         },
         {
+          cid:6,
           chexi:"Q5",
         },
         {
+          cid:7,
           chexi:"Q7",
         },
         {
+          cid:8,
           chexi:"R8",
       }],
       citys:[
         {
+          sid:1,
           sheng:"四川省",
         },
         {
+          sid:2,
           sheng:"浙江省",
         },
         {
+          sid:3,
           sheng:"重庆市",
         },
         {
+          sid:4,
           sheng:"陕西省"
         },
         {
+          sid:5,
           sheng:"汉东省"
         },
         {
+          sid:6,
           sheng:"广东省"
         },
         {
+          sid:7,
           sheng:"辽宁省"
         }
       ],
-      payTime:["当天","3天内","一周内","两周内","一个月内","半年内","一年以上"]
+      payTime:[
+        {
+          pid:1,
+          time:"当天"
+        },
+        {
+          pid:2,
+          time:"3天内"
+        },
+        {
+          pid:3,
+          time:"一周内"
+        },
+        {
+          pid:4,
+          time:"两周内"
+        },
+        {
+          pid:5,
+          time:"一个月内"
+        },
+        {
+          pid:6,
+          time:"半年内"
+        },
+        {
+          pid:7,
+          time:"一年以上"
+        }
+      ]
     }
   },
   created(){
@@ -143,6 +192,27 @@ export default {
         this.showPhone=false;
       }
     },
+    Submit(){
+      var url = "setInfo";
+      var cid = this.cid;
+      var sid = this.sid;
+      var oname = this.oname;
+      var ophone = this.ophone;
+      var pid = this.pid;
+      var obj = {cid:cid,sid:sid,oname:oname,ophone:ophone,pid:pid};
+      this.axios.get(url,{params:obj}).then((res)=>{
+        if(res.data.data==-1){
+          this.$toast("提交失败,请检查表单信息");
+        }else{
+          this.$toast("提交成功,感谢预约");
+          this.cid = null;
+          this.sid = null;
+          this.oname = null;
+          this.ophone = null;
+          this.pid = null;
+        }
+      })
+    }
   }
 }
 </script>

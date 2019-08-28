@@ -10,12 +10,11 @@
     </a>
   </div>
   <div class="icon-w">
-    <span class="iconfont icon-Menu"></span>
-    <div v-show="show_name">
+    <div class="userList" v-show="show_name">
       <a id="userName" href="javascript:;"></a>
       <span><a href="javascript:;" @click="exit">注销登录</a></span>
     </div>
-    <div v-show="hide_name">
+    <div class="userList" v-show="hide_name">
       <a href="javascript:;" @click="toLog">请登录</a>
       <span><a href="javascript:;" @click="toLog">注册</a></span>
     </div>
@@ -23,7 +22,7 @@
   <div class="row">
     <div class="col-12">
       <ul id="head-ul" class="head-nav">
-        <li @click="show" id="audi">奥迪车型
+        <li @mouseover="show" id="audi">奥迪车型
         </li>
         <li>奥迪官方认证二手车
           <ul>
@@ -128,9 +127,7 @@ export default {
   },
   methods:{
     show(){
-      $("#audi").mouseover(function(){
       $("#car").css("display","flex").css("opacity","1").css("transition","all .5s linear")
-      })
       $("span#close").click(function(){
         $("#car").css("display","none");
       })
@@ -189,6 +186,9 @@ export default {
   }
   ul{
     list-style: none;
+  }
+  dic.userList{
+    float: right;
   }
   li,a{
     color:#212529;

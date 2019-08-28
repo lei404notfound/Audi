@@ -89,6 +89,13 @@ server.get("/getUname",(req,res)=>{
     })
   }
 });
+server.get("/getImg",(req,res)=>{
+  var sql = "SELECT fname,fimg,price,fdetail FROM car_family";
+  pool.query(sql,(err,result)=>{
+    if(err) throw err;
+    res.send({code:1,msg:"success",data:result});
+  })
+})
 //获取首页车型列表图片及车型名
 server.get("/carList",(req,res)=>{
   var fid=req.query.fid;
@@ -114,5 +121,22 @@ server.get("/getBanner",(req,res)=>{
   pool.query(sql,[tid],(err,result)=>{
     if(err) throw err;
     res.send({code:1,msg:"查询成功",data:result})
+  })
+})
+//获取预约页面表格中的数据,保存在数据库中
+server.get("/setInfo",(req,res)=>{
+  var cid = req.query.cid;
+  var sid = req.query.sid;
+  var oname = req.query.oname;
+  var ophone = req.query.ophone;
+  var pid = req.query.pid;
+  var sql = "INSERT INTO order_list (cid,sid,oname,ophone,pid) VALUE (?,?,?,?,?)";
+  pool.query(sql,[cid,sid,oname,ophone,pid],(err,result)=>{
+    if(err) throw err;
+    if(result.affectedRows<0){
+      res.send({code:-1,msg:"提交失败"});
+    }else{
+      res.send({code:1,msg:"提交成功"});
+    }
   })
 })
