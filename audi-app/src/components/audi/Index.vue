@@ -9,7 +9,7 @@
         <a class="text-dark a-size" href="#">查看详情</a>
       </button>
     </div>
-    <img class="d-block w-100 pic1 mb-5" :src="banner[0].tpic">
+    <img class="d-block w-100 pic1 mb-5" :src="`http://127.0.0.1:3000${banner[0].tpic}`">
   </div>
   <ul class="nav nav-tabs">
     <li class="nav-item px-3"><a class="nav-link active text-dark font_small bbr p-0 mt-3" data-toggle="tab" href="#tab1">车型</a></li>
@@ -22,7 +22,7 @@
           </li>
           <li v-for="(item,index) in carList" :key="index">
             <a href="#">
-              <img :src="item.fimg">
+              <img :src="`http://127.0.0.1:3000${item.fimg}`">
               <p class="m-0">{{item.fname}}
                 <ul class="d-flex justify-content-between text-center list-unstyled text-light d-none">
                 </ul>
@@ -35,7 +35,7 @@
         <ul class="d-flex justify-content-between text-center list-unstyled text-light">
           <li v-for="(item,index) in carLei" :key="index">
             <a class="nav-link p-0" href="#">
-              <img :src="item.fimg">
+              <img :src="`http://127.0.0.1:3000${item.fimg}`">
               <p>{{item.fname}}</p>
             </a>
           </li>
@@ -183,12 +183,12 @@ export default {
     var obj2={tn:"tname",tt:"ttitle",tp:"tpic"};
     this.axios.get("/carList",{params:obj1}).then(res=>{
       this.carList=res.data.data;
+    })
     this.axios.get("/carLei",{params:obj1}).then(res=>{
       this.carLei=res.data.data;
+    })
     this.axios.get("/getBanner",{params:obj2}).then(res=>{
       this.banner=res.data.data;
-    })
-    })
     })
   },
   methods:{
