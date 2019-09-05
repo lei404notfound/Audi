@@ -92,7 +92,7 @@
     <div class="fo">
     <div class="foo">
       <ul class="foot">
-        <li v-for="ftext in foottext" class="left"><a href="javascript:;">{{ftext}}</a></li>
+        <li v-for="(ftext,index) in foottext" :key="index" class="left"><a href="javascript:;">{{ftext}}</a></li>
         <li class="right"><a href="javascript:;">
           <img src="../../images/sport/xl.png">
         </a></li>

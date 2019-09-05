@@ -153,19 +153,20 @@ export default {
     width: 100%;
     height: 100%;
     position: absolute;
-    background: url(../../images/login/bg.jpg) no-repeat;
+    background: url(../../images/login/login.jpg) no-repeat;
     background-size: 100% 100%;
     z-index: -1;
   }
   .login{
-    width:500px;
-    height:750px;
+    width:450px;
+    height:75vh;
     background-color: #fff;
     padding:4rem 3rem;
     position: absolute;
     left:50%;top:50%;
     border-radius: 2%;
     transform: translate(-50%,-50%);
+    opacity: .9;
   }
   .p-r{
     position: relative;

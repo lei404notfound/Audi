@@ -99,7 +99,7 @@ server.get("/getImg",(req,res)=>{
 //获取首页车型列表图片及车型名
 server.get("/carList",(req,res)=>{
   var fid=req.query.fid;
-  var sql="SELECT fname,fimg FROM car_family WHERE fid IN(3,5,6,9) GROUP BY fid";
+  var sql="SELECT fname,fimg FROM car_family WHERE fid IN(1,4,7,10,13,16,24) GROUP BY fid";
   pool.query(sql,[fid],(err,result)=>{
     if(err) throw err;
     res.send({code:1,msg:"查询成功",data:result});
@@ -108,8 +108,17 @@ server.get("/carList",(req,res)=>{
 //获取首页车型类型列表图片及类型名
 server.get("/carLei",(req,res)=>{
   var fid=req.query.fid;
-  var sql="SELECT fname,fimg FROM car_family WHERE fid IN(11,4,16,7,14) GROUP BY fid"
+  var sql="SELECT fname,fimg FROM car_family WHERE fid IN(3,6,9,12,15,18,21) GROUP BY fid"
   pool.query(sql,[fid],(err,result)=>{
+    if(err) throw err;
+    res.send({code:1,msg:"查询成功",data:result})
+  })
+})
+//获取首页所有图片
+server.get("/indexPic",(req,res)=>{
+  var pid=req.query.pid;
+  var sql="SELECT href FROM indexPic"
+  pool.query(sql,[pid],(err,result)=>{
     if(err) throw err;
     res.send({code:1,msg:"查询成功",data:result})
   })
